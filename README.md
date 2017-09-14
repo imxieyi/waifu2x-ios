@@ -5,7 +5,7 @@ This is [CoreML](https://developer.apple.com/documentation/coreml) implementatio
 
 ## Requirements
  - XCode 9+
- - iOS 11+e
+ - iOS 11+
  
 ## Convert model
 You can use the same method described in [MobileNet-CoreML](https://github.com/hollance/MobileNet-CoreML). **You should not specify any input and output layer in python script.**
