@@ -11,7 +11,7 @@ This is [CoreML](https://developer.apple.com/documentation/coreml) implemantatio
 You can use the same method described in [MobileNet-CoreML](https://github.com/hollance/MobileNet-CoreML). **You should not specify any input and output layer in python script.**
 
 ## Demo
-![demo.png]
+![](demo.png)
 
 Running on iPad Pro 10.5
 
