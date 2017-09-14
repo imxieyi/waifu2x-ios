@@ -61,6 +61,16 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         }
     }
     
+    @IBAction func onSave(_ sender: Any) {
+        guard let image = outputview.image else {
+            let alert = UIAlertController(title: "Error", message: "You should process the image first!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        image.saveToPhotoLibrary()
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         inputImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         pickercontroller.dismiss(animated: true, completion: nil)
