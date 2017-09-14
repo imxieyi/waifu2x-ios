@@ -15,12 +15,12 @@
 		8A6D46D21F6ADC7B008275C7 /* anime_noise1_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D46C81F6ADC1F008275C7 /* anime_noise1_model.mlmodel */; };
 		8A6D46D31F6ADC7B008275C7 /* anime_noise2_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D46C91F6ADC1F008275C7 /* anime_noise2_model.mlmodel */; };
 		8A6D46D41F6ADC7B008275C7 /* anime_noise3_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D46CA1F6ADC1F008275C7 /* anime_noise3_model.mlmodel */; };
-		8A6D46D51F6ADC7B008275C7 /* anime_scale2.0x_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D46CB1F6ADC1F008275C7 /* anime_scale2.0x_model.mlmodel */; };
+		8A6D46D51F6ADC7B008275C7 /* anime_scale2x_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D46CB1F6ADC1F008275C7 /* anime_scale2x_model.mlmodel */; };
 		8A6D46D61F6ADC7B008275C7 /* photo_noise0_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D46CC1F6ADC77008275C7 /* photo_noise0_model.mlmodel */; };
 		8A6D46D71F6ADC7B008275C7 /* photo_noise1_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D46CE1F6ADC77008275C7 /* photo_noise1_model.mlmodel */; };
 		8A6D46D81F6ADC7B008275C7 /* photo_noise2_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D46CF1F6ADC77008275C7 /* photo_noise2_model.mlmodel */; };
 		8A6D46D91F6ADC7B008275C7 /* photo_noise3_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D46D01F6ADC77008275C7 /* photo_noise3_model.mlmodel */; };
-		8A6D46DA1F6ADC7B008275C7 /* photo_scale2.0x_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D46CD1F6ADC77008275C7 /* photo_scale2.0x_model.mlmodel */; };
+		8A6D46DA1F6ADC7B008275C7 /* photo_scale2x_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D46CD1F6ADC77008275C7 /* photo_scale2x_model.mlmodel */; };
 		8AA098541F699011000CD809 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA098531F699011000CD809 /* AppDelegate.swift */; };
 		8AA098561F699011000CD809 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA098551F699011000CD809 /* ViewController.swift */; };
 		8AA098591F699011000CD809 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AA098571F699011000CD809 /* Main.storyboard */; };
@@ -39,9 +39,9 @@
 		8A6D46C81F6ADC1F008275C7 /* anime_noise1_model.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = anime_noise1_model.mlmodel; sourceTree = "<group>"; };
 		8A6D46C91F6ADC1F008275C7 /* anime_noise2_model.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = anime_noise2_model.mlmodel; sourceTree = "<group>"; };
 		8A6D46CA1F6ADC1F008275C7 /* anime_noise3_model.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = anime_noise3_model.mlmodel; sourceTree = "<group>"; };
-		8A6D46CB1F6ADC1F008275C7 /* anime_scale2.0x_model.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = anime_scale2.0x_model.mlmodel; sourceTree = "<group>"; };
+		8A6D46CB1F6ADC1F008275C7 /* anime_scale2x_model.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = anime_scale2x_model.mlmodel; sourceTree = "<group>"; };
 		8A6D46CC1F6ADC77008275C7 /* photo_noise0_model.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = photo_noise0_model.mlmodel; sourceTree = "<group>"; };
-		8A6D46CD1F6ADC77008275C7 /* photo_scale2.0x_model.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = photo_scale2.0x_model.mlmodel; sourceTree = "<group>"; };
+		8A6D46CD1F6ADC77008275C7 /* photo_scale2x_model.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = photo_scale2x_model.mlmodel; sourceTree = "<group>"; };
 		8A6D46CE1F6ADC77008275C7 /* photo_noise1_model.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = photo_noise1_model.mlmodel; sourceTree = "<group>"; };
 		8A6D46CF1F6ADC77008275C7 /* photo_noise2_model.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = photo_noise2_model.mlmodel; sourceTree = "<group>"; };
 		8A6D46D01F6ADC77008275C7 /* photo_noise3_model.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = photo_noise3_model.mlmodel; sourceTree = "<group>"; };
@@ -105,12 +105,12 @@
 				8A6D46C81F6ADC1F008275C7 /* anime_noise1_model.mlmodel */,
 				8A6D46C91F6ADC1F008275C7 /* anime_noise2_model.mlmodel */,
 				8A6D46CA1F6ADC1F008275C7 /* anime_noise3_model.mlmodel */,
-				8A6D46CB1F6ADC1F008275C7 /* anime_scale2.0x_model.mlmodel */,
+				8A6D46CB1F6ADC1F008275C7 /* anime_scale2x_model.mlmodel */,
 				8A6D46CC1F6ADC77008275C7 /* photo_noise0_model.mlmodel */,
 				8A6D46CE1F6ADC77008275C7 /* photo_noise1_model.mlmodel */,
 				8A6D46CF1F6ADC77008275C7 /* photo_noise2_model.mlmodel */,
 				8A6D46D01F6ADC77008275C7 /* photo_noise3_model.mlmodel */,
-				8A6D46CD1F6ADC77008275C7 /* photo_scale2.0x_model.mlmodel */,
+				8A6D46CD1F6ADC77008275C7 /* photo_scale2x_model.mlmodel */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -222,7 +222,7 @@
 				8A6D46D31F6ADC7B008275C7 /* anime_noise2_model.mlmodel in Sources */,
 				8AA098541F699011000CD809 /* AppDelegate.swift in Sources */,
 				8A6D46D41F6ADC7B008275C7 /* anime_noise3_model.mlmodel in Sources */,
-				8A6D46D51F6ADC7B008275C7 /* anime_scale2.0x_model.mlmodel in Sources */,
+				8A6D46D51F6ADC7B008275C7 /* anime_scale2x_model.mlmodel in Sources */,
 				8A6D46D21F6ADC7B008275C7 /* anime_noise1_model.mlmodel in Sources */,
 				8A6D46BE1F6AC71C008275C7 /* UIImage+Bicubic.swift in Sources */,
 				8AB792A01F69A52C002CEF48 /* UIImage+MultiArray.swift in Sources */,
@@ -230,7 +230,7 @@
 				8A6D46C41F6AD26A008275C7 /* UIImage+Reload.swift in Sources */,
 				8A6D46D91F6ADC7B008275C7 /* photo_noise3_model.mlmodel in Sources */,
 				8A6D46D81F6ADC7B008275C7 /* photo_noise2_model.mlmodel in Sources */,
-				8A6D46DA1F6ADC7B008275C7 /* photo_scale2.0x_model.mlmodel in Sources */,
+				8A6D46DA1F6ADC7B008275C7 /* photo_scale2x_model.mlmodel in Sources */,
 				8A6D46B31F6AAD86008275C7 /* UIImage+Crop.swift in Sources */,
 				8A6D46D61F6ADC7B008275C7 /* photo_noise0_model.mlmodel in Sources */,
 			);

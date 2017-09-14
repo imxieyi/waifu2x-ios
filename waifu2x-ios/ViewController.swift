@@ -9,25 +9,61 @@
 import UIKit
 import CoreML
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     @IBOutlet weak var inputview: UIImageView!
     @IBOutlet weak var outputview: UIImageView!
     
-    let model = noise2_model()
-    var inputImage: UIImage!
+    @IBOutlet weak var progress: UILabel!
+    
+    var inputImage: UIImage! {
+        didSet {
+            inputview.image = inputImage
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let path = Bundle.main.path(forResource: "37872248_p0", ofType: "jpg")
-        inputImage = UIImage(imageLiteralResourceName: path!)
-        inputview.image = inputImage
-        //outputview.image = inputImage.scale2x()
     }
+    
+    let pickercontroller = UIImagePickerController()
 
+    @IBAction func onPick(_ sender: Any) {
+        pickercontroller.delegate = self
+        pickercontroller.sourceType = .photoLibrary
+        present(pickercontroller, animated: true, completion: nil)
+    }
+    
     @IBAction func onProcess(_ sender: Any) {
-        outputview.image = inputImage.scale2x().reload()?.run(model: .noise2)?.reload()?.run(model: .scale2)
+        guard inputImage != nil else {
+            return
+        }
+        // Reference: https://stackoverflow.com/questions/24755558/measure-elapsed-time-in-swift
+        let start = DispatchTime.now()
+        let background = DispatchQueue(label: "background")
+        progress.text = "Noise reducing..."
+        background.async {
+            let image_noise = self.inputImage.run(model: .anime_noise2)?.reload()
+            DispatchQueue.main.async {
+                self.progress.text = "Scaling..."
+                background.async {
+                    let image_scale = image_noise?.scale2x().reload()?.run(model: .anime_scale2x)
+                    DispatchQueue.main.async {
+                        let end = DispatchTime.now()
+                        let nanotime = end.uptimeNanoseconds - start.uptimeNanoseconds
+                        let timeInterval = Double(nanotime) / 1_000_000_000
+                        self.progress.text = "Time elapsed: \(timeInterval)"
+                        self.outputview.image = image_scale
+                    }
+                }
+            }
+        }
     }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        inputImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        pickercontroller.dismiss(animated: true, completion: nil)
+    }
+    
 }
-

@@ -11,8 +11,16 @@ import UIKit
 import CoreML
 
 public enum Model {
-    case noise2
-    case scale2
+    case anime_noise0
+    case anime_noise1
+    case anime_noise2
+    case anime_noise3
+    case anime_scale2x
+    case photo_noise0
+    case photo_noise1
+    case photo_noise2
+    case photo_noise3
+    case photo_scale2x
 }
 
 extension UIImage {
@@ -25,8 +33,8 @@ extension UIImage {
         let multis = getCroppedMultiArray(rects: rects)
         // Run prediction on each block
         switch model {
-        case .noise2:
-            let model = noise2_model()
+        case .anime_noise0:
+            let model = anime_noise0_model()
             for multi in multis {
                 let result = try! model.prediction(input: multi)
                 guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
@@ -34,8 +42,80 @@ extension UIImage {
                 }
                 resultArrays.append(resultArray)
             }
-        case .scale2:
-            let model = scale2_0x_model()
+        case .anime_noise1:
+            let model = anime_noise1_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
+        case .anime_noise2:
+            let model = anime_noise2_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
+        case .anime_noise3:
+            let model = anime_noise3_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
+        case .anime_scale2x:
+            let model = anime_scale2x_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
+        case .photo_noise0:
+            let model = photo_noise0_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
+        case .photo_noise1:
+            let model = photo_noise1_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
+        case .photo_noise2:
+            let model = photo_noise2_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
+        case .photo_noise3:
+            let model = photo_noise3_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
+        case .photo_scale2x:
+            let model = photo_scale2x_model()
             for multi in multis {
                 let result = try! model.prediction(input: multi)
                 guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
