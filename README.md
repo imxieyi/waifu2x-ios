@@ -19,7 +19,7 @@ Run Denoise level 2 and Scale 2x model on a 3000*3328 png image:
 |Device|Time(s)|
 |---|---|
 |iPad|126.2|
-|PC|36.5|
+|PC|37.5|
 
 ## Demo
 ![](demo.png)
