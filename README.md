@@ -26,7 +26,7 @@ Device|Time(s)
 ---|---
 iPhone|16.7
 iPad|7.2
-PC|
+PC|2.1
 
 #### Test2
 *Image resolution: `3000*3328`*
