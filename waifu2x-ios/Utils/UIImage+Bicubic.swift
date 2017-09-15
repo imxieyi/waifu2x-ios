@@ -11,6 +11,7 @@ import UIKit
 
 extension UIImage {
     
+    // TODO: Not really bicubic but works
     public func scale2x() -> UIImage {
         let newsize = CGSize(width: size.width * 2, height: size.height * 2)
         UIGraphicsBeginImageContext(newsize)

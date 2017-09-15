@@ -19,6 +19,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     var inputImage: UIImage! {
         didSet {
             inputview.image = inputImage
+            debugPrint("Size: \(inputImage.size.width) x \(inputImage.size.height)")
         }
     }
 
