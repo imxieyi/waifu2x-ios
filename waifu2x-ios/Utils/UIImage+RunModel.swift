@@ -138,21 +138,23 @@ extension UIImage {
         }
         let bufferSize = block_size * block_size * 3
         var imgData = [UInt8].init(repeating: 0, count: width * height * 3)
-        for i in 0..<rects.count {
-            let rect = rects[i]
-            let origin_x = Int(rect.origin.x)
-            let origin_y = Int(rect.origin.y)
-            let array = resultArrays[i]
-            let dataPointer = UnsafeMutableBufferPointer(start: array.dataPointer.assumingMemoryBound(to: Double.self),
-                                                         count: bufferSize)
-            for channel in 0..<3 {
-                for src_y in 0..<block_size {
-                    for src_x in 0..<block_size {
-                        let dest_x = origin_x + src_x
-                        let dest_y = origin_y + src_y
-                        let src_index = src_y * 128 + src_x + block_size * block_size * channel
-                        let dest_index = (dest_y * width + dest_x) * 3 + channel
-                        imgData[dest_index] = UInt8(normalize(dataPointer[src_index]))
+        let pool = ThreadPool<CGRect>()
+        pool.run(objs: rects) { (index, rect) in
+            autoreleasepool {
+                let origin_x = Int(rect.origin.x)
+                let origin_y = Int(rect.origin.y)
+                let array = resultArrays[index]
+                let dataPointer = UnsafeMutableBufferPointer(start: array.dataPointer.assumingMemoryBound(to: Double.self),
+                                                             count: bufferSize)
+                for channel in 0..<3 {
+                    for src_y in 0..<block_size {
+                        for src_x in 0..<block_size {
+                            let dest_x = origin_x + src_x
+                            let dest_y = origin_y + src_y
+                            let src_index = src_y * 128 + src_x + block_size * block_size * channel
+                            let dest_index = (dest_y * width + dest_x) * 3 + channel
+                            imgData[dest_index] = UInt8(normalize(dataPointer[src_index]))
+                        }
                     }
                 }
             }

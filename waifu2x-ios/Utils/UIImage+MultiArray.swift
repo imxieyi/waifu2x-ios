@@ -17,21 +17,24 @@ extension UIImage {
         let expwidth = Int(self.size.width) + 14
         let expheight = Int(self.size.height) + 14
         let expanded = expand()
-        var arrs: [MLMultiArray] = []
-        for rect in rects {
-            let x = Int(rect.origin.x)
-            let y = Int(rect.origin.y)
-            let multi = try! MLMultiArray(shape: [3, NSNumber(value: block_size + 14), NSNumber(value: block_size + 14)], dataType: .float32)
-            for y_exp in y..<(y + block_size + 14) {
-                for x_exp in x..<(x + block_size + 14) {
-                    let x_new = x_exp - x
-                    let y_new = y_exp - y
-                    multi[y_new * (block_size + 14) + x_new] = NSNumber(value: expanded[y_exp * expwidth + x_exp])
-                    multi[y_new * (block_size + 14) + x_new + (block_size + 14) * (block_size + 14)] = NSNumber(value: expanded[y_exp * expwidth + x_exp + expwidth * expheight])
-                    multi[y_new * (block_size + 14) + x_new + (block_size + 14) * (block_size + 14) * 2] = NSNumber(value: expanded[y_exp * expwidth + x_exp + expwidth * expheight * 2])
+        var arrs = [MLMultiArray!].init(repeating: nil, count: rects.count)
+        autoreleasepool {
+            let pool = ThreadPool<CGRect>()
+            pool.run(objs: rects, task: { (i, rect) in
+                let x = Int(rect.origin.x)
+                let y = Int(rect.origin.y)
+                let multi = try! MLMultiArray(shape: [3, NSNumber(value: block_size + 14), NSNumber(value: block_size + 14)], dataType: .float32)
+                for y_exp in y..<(y + block_size + 14) {
+                    for x_exp in x..<(x + block_size + 14) {
+                        let x_new = x_exp - x
+                        let y_new = y_exp - y
+                        multi[y_new * (block_size + 14) + x_new] = NSNumber(value: expanded[y_exp * expwidth + x_exp])
+                        multi[y_new * (block_size + 14) + x_new + (block_size + 14) * (block_size + 14)] = NSNumber(value: expanded[y_exp * expwidth + x_exp + expwidth * expheight])
+                        multi[y_new * (block_size + 14) + x_new + (block_size + 14) * (block_size + 14) * 2] = NSNumber(value: expanded[y_exp * expwidth + x_exp + expwidth * expheight * 2])
+                    }
                 }
-            }
-            arrs.append(multi)
+                arrs[i] = multi
+            })
         }
         return arrs
     }
@@ -52,20 +55,23 @@ extension UIImage {
         
         var arr = [Float](repeating: 0, count: 3 * exwidth * exheight)
         
+        var xx, yy, pixel: Int
+        var r, g, b: UInt8
+        var fr, fg, fb: Float
         // http://www.jianshu.com/p/516f01fed6e4
         for y in 0..<height {
             for x in 0..<width {
-                let xx = x + 7
-                let yy = y + 7
-                let pixel = (width * y + x) * 4
-                let r = data[pixel]
-                let g = data[pixel + 1]
-                let b = data[pixel + 2]
+                xx = x + 7
+                yy = y + 7
+                pixel = (width * y + x) * 4
+                r = data[pixel]
+                g = data[pixel + 1]
+                b = data[pixel + 2]
                 // !!! rgb values are from 0 to 1
                 // https://github.com/chungexcy/waifu2x-new/blob/master/image_test.py
-                let fr = Float(r) / 255
-                let fg = Float(g) / 255
-                let fb = Float(b) / 255
+                fr = Float(r) / 255
+                fg = Float(g) / 255
+                fb = Float(b) / 255
                 arr[yy * exwidth + xx] = fr
                 arr[yy * exwidth + xx + exwidth * exheight] = fg
                 arr[yy * exwidth + xx + exwidth * exheight * 2] = fb
