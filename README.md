@@ -11,6 +11,9 @@ This is a [CoreML](https://developer.apple.com/documentation/coreml) implementat
 You should [convert pre-trained models to CoreML format](https://developer.apple.com/documentation/coreml/converting_trained_models_to_core_ml) and import it to **XCode**. The pre-trained model can be obtained from [waifu2x-caffe](https://github.com/lltcggie/waifu2x-caffe).
 You can use the same method described in [MobileNet-CoreML](https://github.com/hollance/MobileNet-CoreML). **You should not specify any input and output layer in python script.**
 
+**A working model should have input and output like the following example:**
+![](model_example.png)
+
 ## Benchmark
 ### Environment
 - **iPhone** - waifu2x-ios on iPhone 6s with iOS 11.0 GM
