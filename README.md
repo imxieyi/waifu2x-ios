@@ -12,7 +12,7 @@ You should [convert pre-trained models to CoreML format](https://developer.apple
 You can use the same method described in [MobileNet-CoreML](https://github.com/hollance/MobileNet-CoreML). **You should not specify any input and output layer in python script.**
 
 **A working model should have input and output like the following example:**
-![](model_example.png)
+![](screenshots/model_example.png)
 
 ## Benchmark
 ### Environment
@@ -41,6 +41,6 @@ iPad|126.2
 PC|37.5
 
 ## Demo
-![](demo.png)
+![](screenshots/demo.png)
 
 Image source: [https://www.pixiv.net/member_illust.php?mode=medium&illust_id=48913476](https://www.pixiv.net/member_illust.php?mode=medium&illust_id=48913476)
