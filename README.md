@@ -4,17 +4,21 @@
 The source code of App Store version is under [store-version](https://github.com/imxieyi/waifu2x-ios/tree/store-version) branch. **But if you want to hack into it I strongly recommend you to use this master branch because it has much simpler code.**
 
 ## Introduction
-This is a [CoreML](https://developer.apple.com/documentation/coreml) implementation of [waifu2x](https://github.com/nagadomi/waifu2x). The target of this project is to run waifu2x models right on iOS devices even without network.
+This is a [Core ML](https://developer.apple.com/documentation/coreml) implementation of [waifu2x](https://github.com/nagadomi/waifu2x). The target of this project is to run waifu2x models right on iOS devices even without network.
 
 ## Requirements
  - XCode 9+
  - iOS 11+
  
 ## About models
-You should [convert pre-trained models to CoreML format](https://developer.apple.com/documentation/coreml/converting_trained_models_to_core_ml) and import it to **XCode**. The pre-trained model can be obtained from [waifu2x-caffe](https://github.com/lltcggie/waifu2x-caffe).
+This repository includes all the models converted from [waifu2x-caffe](https://github.com/lltcggie/waifu2x-caffe). **If you want to learn Core ML, it is recommended that you should convert them by yourself.**
+
+You can [convert pre-trained models to Core ML format](https://developer.apple.com/documentation/coreml/converting_trained_models_to_core_ml) and then import them to **XCode**. The pre-trained model can be obtained from [waifu2x-caffe](https://github.com/lltcggie/waifu2x-caffe).
+
 You can use the same method described in [MobileNet-CoreML](https://github.com/hollance/MobileNet-CoreML). **You should not specify any input and output layer in python script.**
 
 **A working model should have input and output like the following example:**
+
 ![](screenshots/model_example.png)
 
 ## Benchmark

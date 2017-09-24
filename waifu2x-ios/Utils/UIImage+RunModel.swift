@@ -34,9 +34,23 @@ extension UIImage {
         // Run prediction on each block
         switch model {
         case .anime_noise0:
-            return self
+            let model = anime_noise0_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
         case .anime_noise1:
-            return self
+            let model = anime_noise1_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
         case .anime_noise2:
             let model = anime_noise2_model()
             for multi in multis {
@@ -47,7 +61,14 @@ extension UIImage {
                 resultArrays.append(resultArray)
             }
         case .anime_noise3:
-            return self
+            let model = anime_noise3_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
         case .anime_scale2x:
             let model = anime_scale2x_model()
             for multi in multis {
@@ -58,15 +79,50 @@ extension UIImage {
                 resultArrays.append(resultArray)
             }
         case .photo_noise0:
-            return self
+            let model = photo_noise0_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
         case .photo_noise1:
-            return self
+            let model = photo_noise1_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
         case .photo_noise2:
-            return self
+            let model = photo_noise2_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
         case .photo_noise3:
-            return self
+            let model = photo_noise3_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
         case .photo_scale2x:
-            return self
+            let model = photo_scale2x_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
         }
         
         // Merge arrays into one array
