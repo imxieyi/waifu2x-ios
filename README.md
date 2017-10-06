@@ -1,4 +1,8 @@
 # waifu2x on iOS
+[![](https://img.shields.io/github/last-commit/imxieyi/waifu2x-ios/store-version.svg)](https://github.com/imxieyi/waifu2x-ios/commits/store-version)
+[![](https://img.shields.io/itunes/v/1286485858.svg)](https://itunes.apple.com/app/waifu2x/id1286485858)
+[![](https://img.shields.io/github/license/imxieyi/waifu2x-ios.svg)](https://github.com/imxieyi/waifu2x-ios/blob/master/LICENSE)
+
 [![](appstore.svg)](https://itunes.apple.com/app/waifu2x/id1286485858)
 
 The source code of App Store version is under [store-version](https://github.com/imxieyi/waifu2x-ios/tree/store-version) branch. **But if you want to hack into it I strongly recommend you to use this master branch because it has much simpler code.**
@@ -11,7 +15,7 @@ This is a [Core ML](https://developer.apple.com/documentation/coreml) implementa
  - iOS 11+
  
 ## About models
-This repository includes all the models converted from [waifu2x-caffe](https://github.com/lltcggie/waifu2x-caffe). **If you want to learn Core ML, it is recommended that you should convert them by yourself.**
+This repository includes all the models converted from [waifu2x-caffe](https://github.com/lltcggie/waifu2x-caffe). **If you want to dig into Core ML, it is recommended that you should convert them by yourself.**
 
 You can [convert pre-trained models to Core ML format](https://developer.apple.com/documentation/coreml/converting_trained_models_to_core_ml) and then import them to **XCode**. The pre-trained model can be obtained from [waifu2x-caffe](https://github.com/lltcggie/waifu2x-caffe).
 
