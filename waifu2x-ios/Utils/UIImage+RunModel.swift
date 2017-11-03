@@ -16,18 +16,32 @@ public enum Model {
     case anime_noise2
     case anime_noise3
     case anime_scale2x
+    case anime_noise0_scale2x
+    case anime_noise1_scale2x
+    case anime_noise2_scale2x
+    case anime_noise3_scale2x
     case photo_noise0
     case photo_noise1
     case photo_noise2
     case photo_noise3
     case photo_scale2x
+    case photo_noise0_scale2x
+    case photo_noise1_scale2x
+    case photo_noise2_scale2x
+    case photo_noise3_scale2x
 }
 
 extension UIImage {
     
-    public func run(model: Model) -> UIImage? {
+    public func run(model: Model, scale: CGFloat = 1) -> UIImage? {
         let width = Int(self.size.width)
         let height = Int(self.size.height)
+        switch model {
+        case .anime_noise0, .anime_noise1, .anime_noise2, .anime_noise3, .photo_noise0, .photo_noise1, .photo_noise2, .photo_noise3:
+            block_size = 128
+        default:
+            block_size = 142
+        }
         var resultArrays: [MLMultiArray] = []
         let rects = getCropRects()
         let multis = getCroppedMultiArray(rects: rects)
@@ -70,7 +84,43 @@ extension UIImage {
                 resultArrays.append(resultArray)
             }
         case .anime_scale2x:
-            let model = anime_scale2x_model()
+            let model = up_anime_scale2x_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
+        case .anime_noise0_scale2x:
+            let model = up_anime_noise0_scale2x_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
+        case .anime_noise1_scale2x:
+            let model = up_anime_noise1_scale2x_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
+        case .anime_noise2_scale2x:
+            let model = up_anime_noise2_scale2x_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
+        case .anime_noise3_scale2x:
+            let model = up_anime_noise3_scale2x_model()
             for multi in multis {
                 let result = try! model.prediction(input: multi)
                 guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
@@ -115,7 +165,43 @@ extension UIImage {
                 resultArrays.append(resultArray)
             }
         case .photo_scale2x:
-            let model = photo_scale2x_model()
+            let model = up_photo_scale2x_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
+        case .photo_noise0_scale2x:
+            let model = up_photo_noise0_scale2x_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
+        case .photo_noise1_scale2x:
+            let model = up_photo_noise1_scale2x_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
+        case .photo_noise2_scale2x:
+            let model = up_photo_noise2_scale2x_model()
+            for multi in multis {
+                let result = try! model.prediction(input: multi)
+                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
+                    return nil
+                }
+                resultArrays.append(resultArray)
+            }
+        case .photo_noise3_scale2x:
+            let model = up_photo_noise3_scale2x_model()
             for multi in multis {
                 let result = try! model.prediction(input: multi)
                 guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
@@ -136,34 +222,37 @@ extension UIImage {
             }
             return output
         }
-        let bufferSize = block_size * block_size * 3
-        var imgData = [UInt8].init(repeating: 0, count: width * height * 3)
+        let out_block_size = block_size * Int(scale)
+        let out_width = width * Int(scale)
+        let out_height = height * Int(scale)
+        let bufferSize = out_block_size * out_block_size * 3
+        var imgData = [UInt8].init(repeating: 0, count: out_width * out_height * 3)
         let pool = ThreadPool<CGRect>()
         pool.run(objs: rects) { (index, rect) in
             autoreleasepool {
-                let origin_x = Int(rect.origin.x)
-                let origin_y = Int(rect.origin.y)
+                let origin_x = Int(rect.origin.x * scale)
+                let origin_y = Int(rect.origin.y * scale)
                 let array = resultArrays[index]
                 let dataPointer = UnsafeMutableBufferPointer(start: array.dataPointer.assumingMemoryBound(to: Double.self),
                                                              count: bufferSize)
                 for channel in 0..<3 {
-                    for src_y in 0..<block_size {
-                        for src_x in 0..<block_size {
+                    for src_y in 0..<out_block_size {
+                        for src_x in 0..<out_block_size {
                             let dest_x = origin_x + src_x
                             let dest_y = origin_y + src_y
-                            let src_index = src_y * 128 + src_x + block_size * block_size * channel
-                            let dest_index = (dest_y * width + dest_x) * 3 + channel
+                            let src_index = src_y * out_block_size + src_x + out_block_size * out_block_size * channel
+                            let dest_index = (dest_y * out_width + dest_x) * 3 + channel
                             imgData[dest_index] = UInt8(normalize(dataPointer[src_index]))
                         }
                     }
                 }
             }
         }
-        let cfbuffer = CFDataCreate(nil, &imgData, width * height * 3)!
+        let cfbuffer = CFDataCreate(nil, &imgData, out_width * out_height * 3)!
         let dataProvider = CGDataProvider(data: cfbuffer)!
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let bitmapInfo = CGBitmapInfo.byteOrder32Big
-        let cgImage = CGImage(width: width, height: height, bitsPerComponent: 8, bitsPerPixel: 24, bytesPerRow: width * 3, space: colorSpace, bitmapInfo: bitmapInfo, provider: dataProvider, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent)
+        let cgImage = CGImage(width: out_width, height: out_height, bitsPerComponent: 8, bitsPerPixel: 24, bytesPerRow: out_width * 3, space: colorSpace, bitmapInfo: bitmapInfo, provider: dataProvider, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent)
         let outImage = UIImage(cgImage: cgImage!)
         return outImage
     }

@@ -43,21 +43,15 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         // Reference: https://stackoverflow.com/questions/24755558/measure-elapsed-time-in-swift
         let start = DispatchTime.now()
         let background = DispatchQueue(label: "background")
-        progress.text = "Noise reducing..."
+        progress.text = "Scaling..."
         background.async {
-            let image_noise = self.inputImage.run(model: .anime_noise2)?.reload()
+            let outimage = self.inputImage.run(model: .anime_noise2_scale2x, scale: 2)?.reload()
+            let end = DispatchTime.now()
+            let nanotime = end.uptimeNanoseconds - start.uptimeNanoseconds
+            let timeInterval = Double(nanotime) / 1_000_000_000
             DispatchQueue.main.async {
-                self.progress.text = "Scaling..."
-                background.async {
-                    let image_scale = image_noise?.scale2x().reload()?.run(model: .anime_scale2x)
-                    DispatchQueue.main.async {
-                        let end = DispatchTime.now()
-                        let nanotime = end.uptimeNanoseconds - start.uptimeNanoseconds
-                        let timeInterval = Double(nanotime) / 1_000_000_000
-                        self.progress.text = "Time elapsed: \(timeInterval)"
-                        self.outputview.image = image_scale
-                    }
-                }
+                self.progress.text = "Time elapsed: \(timeInterval)"
+                self.outputview.image = outimage
             }
         }
     }
