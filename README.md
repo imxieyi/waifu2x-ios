@@ -31,15 +31,15 @@ You can use the same method described in [MobileNet-CoreML](https://github.com/h
 - **iPad** - waifu2x-ios on iPad Pro 10.5 with iOS 11.0 GM
 - **PC** - waifu2x-caffe on Windows 10 16278 with [GTX 960M](https://www.geforce.com/hardware/notebook-gpus/geforce-gtx-960m)
 ### Results
-All of the tests are running `denoise level 2` and `scale 2x` model on anime-style images from [Pixiv](https://www.pixiv.net/).
+All of the tests are running `denoise level 2` with `scale 2x` model on anime-style images from [Pixiv](https://www.pixiv.net/).
 
 #### Test1
 *Image resolution: `600*849`*
 
 Device|Time(s)
 ---|---
-iPhone|16.7
-iPad|7.2
+iPhone|7.9
+iPad|3.8
 PC|2.1
 
 #### Test2
@@ -48,7 +48,7 @@ PC|2.1
 Device|Time(s)
 ---|---
 iPhone|- *(No enough RAM)*
-iPad|126.2
+iPad|63.2
 PC|37.5
 
 ## Demo
