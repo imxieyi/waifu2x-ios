@@ -17,6 +17,8 @@
 		8A4C44581FAC79DB00246018 /* up_photo_noise0_scale2x_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C44531FAC79DB00246018 /* up_photo_noise0_scale2x_model.mlmodel */; };
 		8A4C44591FAC79DB00246018 /* up_photo_noise1_scale2x_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C44541FAC79DB00246018 /* up_photo_noise1_scale2x_model.mlmodel */; };
 		8A4C445A1FAC79DB00246018 /* up_photo_scale2x_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C44551FAC79DB00246018 /* up_photo_scale2x_model.mlmodel */; };
+		8A5EDF891FAF46E3003CD4E3 /* BackgroundPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5EDF881FAF46E3003CD4E3 /* BackgroundPipeline.swift */; };
+		8A5EDF8B1FAF4889003CD4E3 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5EDF8A1FAF4889003CD4E3 /* Queue.swift */; };
 		8A6D46B31F6AAD86008275C7 /* UIImage+Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D46B21F6AAD86008275C7 /* UIImage+Crop.swift */; };
 		8A6D46B51F6AAEAE008275C7 /* UIImage+RunModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D46B41F6AAEAE008275C7 /* UIImage+RunModel.swift */; };
 		8A6D46C41F6AD26A008275C7 /* UIImage+Reload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D46C31F6AD26A008275C7 /* UIImage+Reload.swift */; };
@@ -51,6 +53,8 @@
 		8A4C44531FAC79DB00246018 /* up_photo_noise0_scale2x_model.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = up_photo_noise0_scale2x_model.mlmodel; sourceTree = "<group>"; };
 		8A4C44541FAC79DB00246018 /* up_photo_noise1_scale2x_model.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = up_photo_noise1_scale2x_model.mlmodel; sourceTree = "<group>"; };
 		8A4C44551FAC79DB00246018 /* up_photo_scale2x_model.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = up_photo_scale2x_model.mlmodel; sourceTree = "<group>"; };
+		8A5EDF881FAF46E3003CD4E3 /* BackgroundPipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundPipeline.swift; sourceTree = "<group>"; };
+		8A5EDF8A1FAF4889003CD4E3 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		8A6D46B21F6AAD86008275C7 /* UIImage+Crop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Crop.swift"; sourceTree = "<group>"; };
 		8A6D46B41F6AAEAE008275C7 /* UIImage+RunModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+RunModel.swift"; sourceTree = "<group>"; };
 		8A6D46BC1F6AC454008275C7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -154,6 +158,8 @@
 				8A6D46C31F6AD26A008275C7 /* UIImage+Reload.swift */,
 				8A6D46DB1F6AE88A008275C7 /* UIImage+IO.swift */,
 				8A84E5861F6B783E0096037B /* ThreadPool.swift */,
+				8A5EDF881FAF46E3003CD4E3 /* BackgroundPipeline.swift */,
+				8A5EDF8A1FAF4889003CD4E3 /* Queue.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -248,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A6D46B51F6AAEAE008275C7 /* UIImage+RunModel.swift in Sources */,
+				8A5EDF891FAF46E3003CD4E3 /* BackgroundPipeline.swift in Sources */,
 				8AA098561F699011000CD809 /* ViewController.swift in Sources */,
 				8A4C445A1FAC79DB00246018 /* up_photo_scale2x_model.mlmodel in Sources */,
 				8AA098541F699011000CD809 /* AppDelegate.swift in Sources */,
@@ -261,6 +268,7 @@
 				8A4C444D1FAC797100246018 /* up_anime_noise2_scale2x_model.mlmodel in Sources */,
 				8A84E5871F6B783E0096037B /* ThreadPool.swift in Sources */,
 				8AC903401F77DE7900E9F6A8 /* photo_noise2_model.mlmodel in Sources */,
+				8A5EDF8B1FAF4889003CD4E3 /* Queue.swift in Sources */,
 				8AC9033A1F77DE7900E9F6A8 /* anime_noise1_model.mlmodel in Sources */,
 				8A4C444F1FAC797100246018 /* up_anime_noise0_scale2x_model.mlmodel in Sources */,
 				8AB792A01F69A52C002CEF48 /* UIImage+MultiArray.swift in Sources */,
