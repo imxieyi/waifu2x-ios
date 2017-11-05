@@ -9,43 +9,7 @@
 import UIKit
 import CoreML
 
-/// The output block size.
-/// It is dependent on the model.
-/// Do not modify it until you are sure your model has a different number.
-var block_size = 128
-
-/// The difference of output and input block size
-let shrink_size = 7
-
 extension UIImage {
-    
-    public func getCroppedMultiArray(rects: [CGRect]) -> [MLMultiArray] {
-        let expwidth = Int(self.size.width) + 2 * shrink_size
-        let expheight = Int(self.size.height) + 2 * shrink_size
-        let expanded = expand()
-        var arrs = [MLMultiArray!].init(repeating: nil, count: rects.count)
-        autoreleasepool {
-            let pool = ThreadPool<CGRect>()
-            pool.run(objs: rects, task: { (i, rect) in
-                let x = Int(rect.origin.x)
-                let y = Int(rect.origin.y)
-                let multi = try! MLMultiArray(shape: [3, NSNumber(value: block_size + 2 * shrink_size), NSNumber(value: block_size + 2 * shrink_size)], dataType: .float32)
-                var x_new: Int
-                var y_new: Int
-                for y_exp in y..<(y + block_size + 2 * shrink_size) {
-                    for x_exp in x..<(x + block_size + 2 * shrink_size) {
-                        x_new = x_exp - x
-                        y_new = y_exp - y
-                        multi[y_new * (block_size + 2 * shrink_size) + x_new] = NSNumber(value: expanded[y_exp * expwidth + x_exp])
-                        multi[y_new * (block_size + 2 * shrink_size) + x_new + (block_size + 2 * shrink_size) * (block_size + 2 * shrink_size)] = NSNumber(value: expanded[y_exp * expwidth + x_exp + expwidth * expheight])
-                        multi[y_new * (block_size + 2 * shrink_size) + x_new + (block_size + 2 * shrink_size) * (block_size + 2 * shrink_size) * 2] = NSNumber(value: expanded[y_exp * expwidth + x_exp + expwidth * expheight * 2])
-                    }
-                }
-                arrs[i] = multi
-            })
-        }
-        return arrs
-    }
     
     /// Expand the original image by shrink_size and store rgb in float array.
     /// The model will shrink the input image by 7 px.

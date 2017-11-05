@@ -10,6 +10,14 @@ import Foundation
 import UIKit
 import CoreML
 
+/// The output block size.
+/// It is dependent on the model.
+/// Do not modify it until you are sure your model has a different number.
+var block_size = 128
+
+/// The difference of output and input block size
+let shrink_size = 7
+
 extension UIImage {
     
     public func run(model: Model, scale: CGFloat = 1) -> UIImage? {
