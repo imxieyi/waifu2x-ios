@@ -10,27 +10,6 @@ import Foundation
 import UIKit
 import CoreML
 
-public enum Model {
-    case anime_noise0
-    case anime_noise1
-    case anime_noise2
-    case anime_noise3
-    case anime_scale2x
-    case anime_noise0_scale2x
-    case anime_noise1_scale2x
-    case anime_noise2_scale2x
-    case anime_noise3_scale2x
-    case photo_noise0
-    case photo_noise1
-    case photo_noise2
-    case photo_noise3
-    case photo_scale2x
-    case photo_noise0_scale2x
-    case photo_noise1_scale2x
-    case photo_noise2_scale2x
-    case photo_noise3_scale2x
-}
-
 extension UIImage {
     
     public func run(model: Model, scale: CGFloat = 1) -> UIImage? {
@@ -43,8 +22,7 @@ extension UIImage {
             block_size = 142
         }
         let rects = getCropRects()
-        let multis = getCroppedMultiArray(rects: rects)
-        // Prepare for output array
+        // Prepare for output pipeline
         // Merge arrays into one array
         let normalize = { (input: Double) -> Double in
             let output = input * 255
@@ -61,196 +39,57 @@ extension UIImage {
         let out_height = height * Int(scale)
         let bufferSize = out_block_size * out_block_size * 3
         var imgData = [UInt8].init(repeating: 0, count: out_width * out_height * 3)
-        let pipeline = BackgroundPipeline<MLMultiArray>("merge_pipeline", count: rects.count) { (index, array) in
-            autoreleasepool {
-                let rect = rects[index]
-                let origin_x = Int(rect.origin.x * scale)
-                let origin_y = Int(rect.origin.y * scale)
-                let dataPointer = UnsafeMutableBufferPointer(start: array.dataPointer.assumingMemoryBound(to: Double.self),
-                                                             count: bufferSize)
-                var dest_x: Int
-                var dest_y: Int
-                var src_index: Int
-                var dest_index: Int
-                for channel in 0..<3 {
-                    for src_y in 0..<out_block_size {
-                        for src_x in 0..<out_block_size {
-                            dest_x = origin_x + src_x
-                            dest_y = origin_y + src_y
-                            src_index = src_y * out_block_size + src_x + out_block_size * out_block_size * channel
-                            dest_index = (dest_y * out_width + dest_x) * 3 + channel
-                            imgData[dest_index] = UInt8(normalize(dataPointer[src_index]))
-                        }
+        let out_pipeline = BackgroundPipeline<MLMultiArray>("out_pipeline", count: rects.count) { (index, array) in
+            let rect = rects[index]
+            let origin_x = Int(rect.origin.x * scale)
+            let origin_y = Int(rect.origin.y * scale)
+            let dataPointer = UnsafeMutableBufferPointer(start: array.dataPointer.assumingMemoryBound(to: Double.self),
+                                                         count: bufferSize)
+            var dest_x: Int
+            var dest_y: Int
+            var src_index: Int
+            var dest_index: Int
+            for channel in 0..<3 {
+                for src_y in 0..<out_block_size {
+                    for src_x in 0..<out_block_size {
+                        dest_x = origin_x + src_x
+                        dest_y = origin_y + src_y
+                        src_index = src_y * out_block_size + src_x + out_block_size * out_block_size * channel
+                        dest_index = (dest_y * out_width + dest_x) * 3 + channel
+                        imgData[dest_index] = UInt8(normalize(dataPointer[src_index]))
                     }
                 }
             }
         }
+        // Prepare for model pipeline
         // Run prediction on each block
-        switch model {
-        case .anime_noise0:
-            let model = anime_noise0_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
-        case .anime_noise1:
-            let model = anime_noise1_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
-        case .anime_noise2:
-            let model = anime_noise2_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
-        case .anime_noise3:
-            let model = anime_noise3_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
-        case .anime_scale2x:
-            let model = up_anime_scale2x_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
-        case .anime_noise0_scale2x:
-            let model = up_anime_noise0_scale2x_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
-        case .anime_noise1_scale2x:
-            let model = up_anime_noise1_scale2x_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
-        case .anime_noise2_scale2x:
-            let model = up_anime_noise2_scale2x_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
-        case .anime_noise3_scale2x:
-            let model = up_anime_noise3_scale2x_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
-        case .photo_noise0:
-            let model = photo_noise0_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
-        case .photo_noise1:
-            let model = photo_noise1_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
-        case .photo_noise2:
-            let model = photo_noise2_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
-        case .photo_noise3:
-            let model = photo_noise3_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
-        case .photo_scale2x:
-            let model = up_photo_scale2x_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
-        case .photo_noise0_scale2x:
-            let model = up_photo_noise0_scale2x_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
-        case .photo_noise1_scale2x:
-            let model = up_photo_noise1_scale2x_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
-        case .photo_noise2_scale2x:
-            let model = up_photo_noise2_scale2x_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
-        case .photo_noise3_scale2x:
-            let model = up_photo_noise3_scale2x_model()
-            for multi in multis {
-                let result = try! model.prediction(input: multi)
-                guard let resultArray = result.featureValue(for: "conv7")?.multiArrayValue else {
-                    return nil
-                }
-                pipeline.appendObject(resultArray)
-            }
+        let mlmodel = model.getMLModel()
+        let model_pipeline = BackgroundPipeline<MLMultiArray>("model_pipeline", count: rects.count) { (index, array) in
+            out_pipeline.appendObject(try! mlmodel.prediction(input: array))
         }
-        pipeline.wait()
+        // Start running model
+        let expwidth = Int(self.size.width) + 2 * shrink_size
+        let expheight = Int(self.size.height) + 2 * shrink_size
+        let expanded = expand()
+        for rect in rects {
+            let x = Int(rect.origin.x)
+            let y = Int(rect.origin.y)
+            let multi = try! MLMultiArray(shape: [3, NSNumber(value: block_size + 2 * shrink_size), NSNumber(value: block_size + 2 * shrink_size)], dataType: .float32)
+            var x_new: Int
+            var y_new: Int
+            for y_exp in y..<(y + block_size + 2 * shrink_size) {
+                for x_exp in x..<(x + block_size + 2 * shrink_size) {
+                    x_new = x_exp - x
+                    y_new = y_exp - y
+                    multi[y_new * (block_size + 2 * shrink_size) + x_new] = NSNumber(value: expanded[y_exp * expwidth + x_exp])
+                    multi[y_new * (block_size + 2 * shrink_size) + x_new + (block_size + 2 * shrink_size) * (block_size + 2 * shrink_size)] = NSNumber(value: expanded[y_exp * expwidth + x_exp + expwidth * expheight])
+                    multi[y_new * (block_size + 2 * shrink_size) + x_new + (block_size + 2 * shrink_size) * (block_size + 2 * shrink_size) * 2] = NSNumber(value: expanded[y_exp * expwidth + x_exp + expwidth * expheight * 2])
+                }
+            }
+            model_pipeline.appendObject(multi)
+        }
+        model_pipeline.wait()
+        out_pipeline.wait()
         let cfbuffer = CFDataCreate(nil, &imgData, out_width * out_height * 3)!
         let dataProvider = CGDataProvider(data: cfbuffer)!
         let colorSpace = CGColorSpaceCreateDeviceRGB()

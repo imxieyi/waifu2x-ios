@@ -34,9 +34,11 @@ class BackgroundPipeline <T> {
         background.async {
             var index = 0
             while index < self.count {
-                self.work_sem.wait()
-                task(index, self.queue.dequeue()!)
-                index += 1
+                autoreleasepool {
+                    self.work_sem.wait()
+                    task(index, self.queue.dequeue()!)
+                    index += 1
+                }
             }
             self.wait_sem.signal()
         }
