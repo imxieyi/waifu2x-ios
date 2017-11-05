@@ -38,8 +38,8 @@ All of the tests are running `denoise level 2` with `scale 2x` model on anime-st
 
 Device|Time(s)
 ---|---
-iPhone|7.9
-iPad|3.8
+iPhone|6.8
+iPad|2.9
 PC|2.1
 
 #### Test2
@@ -47,9 +47,22 @@ PC|2.1
 
 Device|Time(s)
 ---|---
-iPhone|- *(No enough RAM)*
-iPad|63.2
+iPhone|-(\*)
+iPad|49.2
 PC|37.5
+
+\* When this image is loaded on my iPhone 6s, it is automatically scaled down to 2048\*1851. The reason is unknown.
+
+#### Evolution
+*Device: iPad*
+*Image resolution: `3000*3328`*
+
+Milestone|Time(s)|RAM usage(GB)
+---|---|---
+Before using upconv models|141.7|1.86
+After using upconv models|63.6|1.28
+After adding pipeline on output|56.8|1.28
+After adding pipeline on prediction|49.2|0.38
 
 ## Demo
 ![](screenshots/demo.png)
