@@ -5,8 +5,6 @@
 
 [![](appstore.svg)](https://itunes.apple.com/app/waifu2x/id1286485858)
 
-The source code of App Store version is under [store-version](https://github.com/imxieyi/waifu2x-ios/tree/store-version) branch. **But if you want to hack into it I strongly recommend you to use this master branch because it has much simpler code.**
-
 ## Introduction
 This is a [Core ML](https://developer.apple.com/documentation/coreml) implementation of [waifu2x](https://github.com/nagadomi/waifu2x). The target of this project is to run waifu2x models right on iOS devices even without network.
 
