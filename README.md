@@ -1,5 +1,4 @@
 # waifu2x on iOS
-[![](https://img.shields.io/github/last-commit/imxieyi/waifu2x-ios/store-version.svg)](https://github.com/imxieyi/waifu2x-ios/commits/store-version)
 [![](https://img.shields.io/itunes/v/1286485858.svg)](https://itunes.apple.com/app/waifu2x/id1286485858)
 [![](https://img.shields.io/github/license/imxieyi/waifu2x-ios.svg)](https://github.com/imxieyi/waifu2x-ios/blob/master/LICENSE)
 
@@ -45,11 +44,9 @@ PC|2.1
 
 Device|Time(s)
 ---|---
-iPhone|-(\*)
+iPhone|129.2
 iPad|49.2
 PC|37.5
-
-\* When this image is loaded on my iPhone 6s, it is automatically scaled down to 2048\*1851. The reason is unknown.
 
 #### Evolution
 *Device: iPad*
