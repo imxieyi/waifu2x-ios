@@ -24,8 +24,8 @@ You can use the same method described in [MobileNet-CoreML](https://github.com/h
 
 ## Benchmark
 ### Environment
-- **iPhone** - waifu2x-ios on iPhone 6s with iOS 11.0 GM
-- **iPad** - waifu2x-ios on iPad Pro 10.5 with iOS 11.0 GM
+- **iPhone** - waifu2x-ios on iPhone 6s with iOS 11.1
+- **iPad** - waifu2x-ios on iPad Pro 10.5 with iOS 11.1
 - **PC** - waifu2x-caffe on Windows 10 16278 with [GTX 960M](https://www.geforce.com/hardware/notebook-gpus/geforce-gtx-960m)
 ### Results
 All of the tests are running `denoise level 2` with `scale 2x` model on anime-style images from [Pixiv](https://www.pixiv.net/).
