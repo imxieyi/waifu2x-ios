@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreML
+import waifu2x
 
 class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     

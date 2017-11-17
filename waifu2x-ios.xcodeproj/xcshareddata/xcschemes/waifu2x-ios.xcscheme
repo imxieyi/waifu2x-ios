@@ -29,6 +29,16 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8AC426D11FBF2E830097EE7C"
+               BuildableName = "waifu2x-iosTests.xctest"
+               BlueprintName = "waifu2x-iosTests"
+               ReferencedContainer = "container:waifu2x-ios.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
