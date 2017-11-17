@@ -24,7 +24,6 @@
 		8AC427141FBF35D70097EE7C /* BackgroundPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4270B1FBF35D70097EE7C /* BackgroundPipeline.swift */; };
 		8AC427151FBF35D70097EE7C /* UIImage+IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4270C1FBF35D70097EE7C /* UIImage+IO.swift */; };
 		8AC427161FBF35D70097EE7C /* UIImage+Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4270D1FBF35D70097EE7C /* UIImage+Crop.swift */; };
-		8AC427171FBF35FE0097EE7C /* waifu2x.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC426EE1FBF35160097EE7C /* waifu2x.framework */; };
 		8AC427191FBF37910097EE7C /* testimg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8AC427181FBF37910097EE7C /* testimg.jpg */; };
 		8AC427311FBF3AD00097EE7C /* photo_noise0_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4271D1FBF3AD00097EE7C /* photo_noise0_model.mlmodel */; };
 		8AC427321FBF3AD00097EE7C /* anime_noise2_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4271E1FBF3AD00097EE7C /* anime_noise2_model.mlmodel */; };
@@ -44,6 +43,8 @@
 		8AC427421FBF3AD00097EE7C /* photo_noise1_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4272E1FBF3AD00097EE7C /* photo_noise1_model.mlmodel */; };
 		8AC427431FBF3AD00097EE7C /* up_photo_noise2_scale2x_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4272F1FBF3AD00097EE7C /* up_photo_noise2_scale2x_model.mlmodel */; };
 		8AC427441FBF3AD00097EE7C /* anime_noise3_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AC427301FBF3AD00097EE7C /* anime_noise3_model.mlmodel */; };
+		8AC427AB1FBF4EA10097EE7C /* waifu2x.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC426EE1FBF35160097EE7C /* waifu2x.framework */; };
+		8AC427AC1FBF4EA10097EE7C /* waifu2x.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC426EE1FBF35160097EE7C /* waifu2x.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +55,28 @@
 			remoteGlobalIDString = 8AC426ED1FBF35160097EE7C;
 			remoteInfo = waifu2x;
 		};
+		8AC427AD1FBF4EA10097EE7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8AA098481F699011000CD809 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8AC426ED1FBF35160097EE7C;
+			remoteInfo = waifu2x;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8AC427AF1FBF4EA10097EE7C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8AC427AC1FBF4EA10097EE7C /* waifu2x.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8A6D46BC1F6AC454008275C7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -107,7 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8AC427171FBF35FE0097EE7C /* waifu2x.framework in Frameworks */,
+				8AC427AB1FBF4EA10097EE7C /* waifu2x.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,10 +270,12 @@
 				8AA0984D1F699011000CD809 /* Frameworks */,
 				8AA0984E1F699011000CD809 /* Resources */,
 				8AB792951F69903B002CEF48 /* ShellScript */,
+				8AC427AF1FBF4EA10097EE7C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8AC427AE1FBF4EA10097EE7C /* PBXTargetDependency */,
 			);
 			name = "waifu2x-ios";
 			productName = "waifu2x-ios";
@@ -443,6 +467,11 @@
 			target = 8AC426ED1FBF35160097EE7C /* waifu2x */;
 			targetProxy = 8AC426F81FBF35160097EE7C /* PBXContainerItemProxy */;
 		};
+		8AC427AE1FBF4EA10097EE7C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8AC426ED1FBF35160097EE7C /* waifu2x */;
+			targetProxy = 8AC427AD1FBF4EA10097EE7C /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -575,6 +604,7 @@
 		8AA098631F699011000CD809 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -592,6 +622,7 @@
 		8AA098641F699011000CD809 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
