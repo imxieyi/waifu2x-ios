@@ -72,7 +72,7 @@ extension UIImage {
         // Prepare for model pipeline
         // Run prediction on each block
         let mlmodel = model.getMLModel()
-        let model_pipeline = BackgroundPipeline<MLMultiArray>("model_pipeline", count: rects.count) { (index, array) in
+        let model_pipeline = BackgroundPipeline<MLMultiArray>("model_pipeline", count: rects.count, threads: 2) { (index, array) in
             out_pipeline.appendObject(try! mlmodel.prediction(input: array))
         }
         // Start running model
