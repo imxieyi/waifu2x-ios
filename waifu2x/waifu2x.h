@@ -2,7 +2,7 @@
 //  waifu2x.h
 //  waifu2x
 //
-//  Created by 谢宜 on 2017/11/17.
+//  Created by 谢宜 on 2017/11/18.
 //  Copyright © 2017年 xieyi. All rights reserved.
 //
 

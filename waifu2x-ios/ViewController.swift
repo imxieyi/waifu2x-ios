@@ -46,7 +46,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         let background = DispatchQueue(label: "background")
         progress.text = "Scaling..."
         background.async {
-            let outimage = self.inputImage.run(model: .anime_noise2_scale2x, scale: 2)?.reload()
+            let outimage = Waifu2x.run(self.inputImage, model: .anime_noise2_scale2x)?.reload()
             let end = DispatchTime.now()
             let nanotime = end.uptimeNanoseconds - start.uptimeNanoseconds
             let timeInterval = Double(nanotime) / 1_000_000_000
@@ -64,7 +64,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             self.present(alert, animated: true, completion: nil)
             return
         }
-        image.saveToPhotoLibrary()
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
