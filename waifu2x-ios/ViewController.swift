@@ -15,6 +15,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBOutlet weak var inputview: UIImageView!
     @IBOutlet weak var outputview: UIImageView!
     
+    @IBOutlet weak var pickBtn: UIButton!
+    @IBOutlet weak var processBtn: UIButton!
+    @IBOutlet weak var saveBtn: UIButton!
     @IBOutlet weak var progress: UILabel!
     
     var inputImage: UIImage! {
@@ -45,14 +48,20 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         let start = DispatchTime.now()
         let background = DispatchQueue(label: "background")
         progress.text = "Scaling..."
+        pickBtn.isEnabled = false
+        processBtn.isEnabled = false
+        saveBtn.isEnabled = false
         background.async {
-            let outimage = Waifu2x.run(self.inputImage, model: .anime_noise2_scale2x)?.reload()
+            let outimage = Waifu2x.run(self.inputImage, model: Model.anime_noise1_scale2x)?.reload()
             let end = DispatchTime.now()
             let nanotime = end.uptimeNanoseconds - start.uptimeNanoseconds
             let timeInterval = Double(nanotime) / 1_000_000_000
             DispatchQueue.main.async {
                 self.progress.text = "Time elapsed: \(timeInterval)"
                 self.outputview.image = outimage
+                self.pickBtn.isEnabled = true
+                self.processBtn.isEnabled = true
+                self.saveBtn.isEnabled = true
             }
         }
     }

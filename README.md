@@ -5,15 +5,15 @@
 [![](appstore.svg)](https://itunes.apple.com/app/waifu2x/id1286485858)
 
 ## Introduction
-This is a [Core ML](https://developer.apple.com/documentation/coreml) implementation of [waifu2x](https://github.com/nagadomi/waifu2x). The target of this project is to run waifu2x models right on iOS devices even without network.
+This is a [Core ML](https://developer.apple.com/documentation/coreml) implementation of [waifu2x](https://github.com/nagadomi/waifu2x). The target of this project is to run waifu2x models right on iOS devices even without network. For macOS version please refer to [waifu2x-mac](https://github.com/imxieyi/waifu2x-mac).
 
 ## Requirements
  - XCode 9+
  - iOS 11+
  
 ## Image format
-Images with `RGB` color space works fine. Others should be converted to `RGB` before processing otherwise output image will broken.
-Alpha channel is scaled using [bicubic interpolation](https://en.wikipedia.org/wiki/Bicubic_interpolation). Generally it runs on GPU. It automatically falls back to CPU if image is too large for Metal to process, which is extremely slow.
+Images with `RGB` color space works fine. Others should be converted to `RGB` before processing otherwise output image will be broken.
+Alpha channel is scaled using [bicubic interpolation](https://en.wikipedia.org/wiki/Bicubic_interpolation). Generally it runs on GPU. It automatically falls back to CPU if image is too large for Metal to process, which is extremely slow. (A bad idea)
  
 ## About models
 This repository includes all the models converted from [waifu2x-caffe](https://github.com/lltcggie/waifu2x-caffe). **If you want to dig into Core ML, it is recommended that you should convert them by yourself.**
@@ -68,5 +68,3 @@ After adding pipeline on prediction|49.2|0.38
 
 ## Demo
 ![](screenshots/demo.png)
-
-Image source: [https://www.pixiv.net/member_illust.php?mode=medium&illust_id=48913476](https://www.pixiv.net/member_illust.php?mode=medium&illust_id=48913476)
