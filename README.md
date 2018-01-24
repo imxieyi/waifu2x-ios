@@ -11,6 +11,10 @@ This is a [Core ML](https://developer.apple.com/documentation/coreml) implementa
  - XCode 9+
  - iOS 11+
  
+## Image format
+Images with `RGB` color space works fine. Others should be converted to `RGB` before processing otherwise output image will broken.
+Alpha channel is scaled using [bicubic interpolation](https://en.wikipedia.org/wiki/Bicubic_interpolation). Generally it runs on GPU. It automatically falls back to CPU if image is too large for Metal to process, which is extremely slow.
+ 
 ## About models
 This repository includes all the models converted from [waifu2x-caffe](https://github.com/lltcggie/waifu2x-caffe). **If you want to dig into Core ML, it is recommended that you should convert them by yourself.**
 
