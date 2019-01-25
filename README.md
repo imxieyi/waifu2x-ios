@@ -65,6 +65,9 @@ Before using upconv models|141.7|1.86
 After using upconv models|63.6|1.28
 After adding pipeline on output|56.8|1.28
 After adding pipeline on prediction|49.2|0.38
+Pure MPSCNN implementation*|29.6|1.57
+
+**\*: With crop size of 384 and double command buffers.**
 
 ## Demo
 ![](screenshots/demo.png)
