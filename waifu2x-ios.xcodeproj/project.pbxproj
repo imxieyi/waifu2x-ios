@@ -29,7 +29,7 @@
 		8AC63BCE2018325A001498E0 /* UIImage+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC63BBE20183259001498E0 /* UIImage+Alpha.swift */; };
 		8AC63BCF2018325A001498E0 /* BackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC63BBF2018325A001498E0 /* BackgroundTask.swift */; };
 		8AC63BD02018325A001498E0 /* UIImage+Expand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC63BC02018325A001498E0 /* UIImage+Expand.swift */; };
-		8AC63BD12018325A001498E0 /* waifu2x.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AC63BC12018325A001498E0 /* waifu2x.h */; };
+		8AC63BD12018325A001498E0 /* waifu2x.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AC63BC12018325A001498E0 /* waifu2x.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8AC63BD22018325A001498E0 /* UIImage+Bicubic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC63BC22018325A001498E0 /* UIImage+Bicubic.swift */; };
 		8AC63BE8201832AD001498E0 /* up_anime_scale2x_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AC63BD5201832A9001498E0 /* up_anime_scale2x_model.mlmodel */; };
 		8AC63BE9201832AD001498E0 /* photo_noise3_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AC63BD6201832A9001498E0 /* photo_noise3_model.mlmodel */; };
