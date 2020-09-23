@@ -1,0 +1,4 @@
+[submodule "BBMetalImage"]
+	path = BBMetalImage
+	url = https://github.com/imxieyi/BBMetalImage
+	branch = screwed

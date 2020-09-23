@@ -11,7 +11,7 @@ import UIKit
 import CoreML
 import MetalKit
 
-public struct Waifu2x {
+public class Waifu2x {
     
     /// The output block size.
     /// It is dependent on the model.

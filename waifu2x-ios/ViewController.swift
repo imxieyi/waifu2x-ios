@@ -8,7 +8,9 @@
 
 import UIKit
 import CoreML
+import AVFoundation
 import waifu2x
+import BBMetalImage
 
 class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
@@ -26,6 +28,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             debugPrint("Size: \(inputImage.size.width) x \(inputImage.size.height)")
         }
     }
+    
+    var videoSource: BBMetalVideoSource!
+    var videoWriter: BBMetalVideoWriter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,9 +81,70 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
     
+    @IBAction func onVideoTest(_ sender: Any) {
+        let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypeVideo), String(kUTTypeMPEG4)], in: .open)
+        documentPicker.allowsMultipleSelection = false
+        documentPicker.shouldShowFileExtensions = true
+        documentPicker.delegate = self
+        present(documentPicker, animated: true, completion: nil)
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        inputImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        inputImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         pickercontroller.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+extension ViewController: UIDocumentPickerDelegate {
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let inputUrl = urls.first else {
+            return
+        }
+        let outputUrl = FileManager.default.temporaryDirectory.appendingPathComponent("output.mp4")
+        if FileManager.default.fileExists(atPath: outputUrl.path) {
+            try! FileManager.default.removeItem(at: outputUrl)
+        }
+        
+        let filter = Waifu2xFilter(model: "up_anime_noise3_scale2x_model")
+        
+        guard let track = AVURLAsset(url: inputUrl).tracks(withMediaType: AVMediaType.video).first else {
+            return
+        }
+        let size = track.naturalSize.applying(track.preferredTransform)
+        
+        let frameSize = BBMetalIntSize(width: Int(size.width) * filter.scaleFactor,
+                                       height: Int(size.height) * filter.scaleFactor)
+        
+        videoWriter = BBMetalVideoWriter(url: outputUrl, frameSize: frameSize)
+        
+        videoSource = BBMetalVideoSource(url: inputUrl)!
+        videoSource.benchmark = true
+        
+        videoSource.audioConsumer = videoWriter
+        
+        videoSource.add(consumer: filter).add(consumer: videoWriter)
+        
+        videoWriter.start()
+        
+        print("Output size:", frameSize.width, frameSize.height)
+        print("Output path:", outputUrl)
+        
+        var index = 0
+        let startTime = Date()
+        videoSource.start(progress: { (time) in
+            index += 1
+            DispatchQueue.main.async {
+                let stats = String(format: "Frame: %d\tTime: %d\tAvg FPS:%.2f", index, time.value, Double(index) / Date().timeIntervalSince(startTime))
+                self.progress.text = stats
+            }
+        }) { (success) in
+            self.videoWriter.finish {
+                print("finished")
+                self.progress.text = String(format: "Finished. Avg FPS:%.2f", Double(index) / Date().timeIntervalSince(startTime))
+            }
+        }
     }
     
 }

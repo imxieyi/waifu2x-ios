@@ -24,6 +24,7 @@ class MetalBicubic {
     }
     
     func maxTextureSize() -> Int {
+        #if !targetEnvironment(macCatalyst)
         if device.supportsFeatureSet(.iOS_GPUFamily3_v1) || device.supportsFeatureSet(.iOS_GPUFamily3_v2) || device.supportsFeatureSet(.iOS_GPUFamily3_v3) || device.supportsFeatureSet(.iOS_GPUFamily4_v1) {
             return 16384
         }
@@ -33,6 +34,7 @@ class MetalBicubic {
         if device.supportsFeatureSet(.iOS_GPUFamily1_v1) || device.supportsFeatureSet(.iOS_GPUFamily2_v1) {
             return 4096
         }
+        #endif
         return 16384
     }
     

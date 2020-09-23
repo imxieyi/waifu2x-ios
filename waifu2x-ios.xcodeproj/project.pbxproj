@@ -3,10 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A17F561251BF045003E7053 /* BBMetalImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A17F560251BF045003E7053 /* BBMetalImage.framework */; };
+		8A17F562251BF045003E7053 /* BBMetalImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A17F560251BF045003E7053 /* BBMetalImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8A95A3C1251BE3B100AA5F2F /* RawMLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A95A3BA251BE3B100AA5F2F /* RawMLModel.swift */; };
+		8A95A3C2251BE3B100AA5F2F /* MLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A95A3BB251BE3B100AA5F2F /* MLNode.swift */; };
+		8A95A3C3251BE3B100AA5F2F /* MLModelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A95A3BC251BE3B100AA5F2F /* MLModelError.swift */; };
+		8A95A3C4251BE3B100AA5F2F /* MPSDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A95A3BD251BE3B100AA5F2F /* MPSDS.swift */; };
+		8A95A3C5251BE3B100AA5F2F /* MPSMLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A95A3BE251BE3B100AA5F2F /* MPSMLModel.swift */; };
+		8A95A3CE251BE3EE00AA5F2F /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 8A95A3CD251BE3EE00AA5F2F /* SwiftyJSON */; };
+		8A95A3EE251BE70D00AA5F2F /* Waifu2xFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A95A3ED251BE70D00AA5F2F /* Waifu2xFilter.swift */; };
+		8A95A3FE251BE77B00AA5F2F /* libCoreML-MPS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A95A3AB251BE39400AA5F2F /* libCoreML-MPS.a */; };
 		8AA098541F699011000CD809 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA098531F699011000CD809 /* AppDelegate.swift */; };
 		8AA098561F699011000CD809 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA098551F699011000CD809 /* ViewController.swift */; };
 		8AA098591F699011000CD809 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AA098571F699011000CD809 /* Main.storyboard */; };
@@ -70,12 +80,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		8A95A3A9251BE39400AA5F2F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8AC427AF1FBF4EA10097EE7C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				8A17F562251BF045003E7053 /* BBMetalImage.framework in Embed Frameworks */,
 				8AC427AC1FBF4EA10097EE7C /* waifu2x.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -84,7 +104,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8A17F560251BF045003E7053 /* BBMetalImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BBMetalImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A6D46BC1F6AC454008275C7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8A95A3AB251BE39400AA5F2F /* libCoreML-MPS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCoreML-MPS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A95A3BA251BE3B100AA5F2F /* RawMLModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawMLModel.swift; sourceTree = "<group>"; };
+		8A95A3BB251BE3B100AA5F2F /* MLNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLNode.swift; sourceTree = "<group>"; };
+		8A95A3BC251BE3B100AA5F2F /* MLModelError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLModelError.swift; sourceTree = "<group>"; };
+		8A95A3BD251BE3B100AA5F2F /* MPSDS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPSDS.swift; sourceTree = "<group>"; };
+		8A95A3BE251BE3B100AA5F2F /* MPSMLModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPSMLModel.swift; sourceTree = "<group>"; };
+		8A95A3D2251BE48300AA5F2F /* waifu2x-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "waifu2x-ios.entitlements"; sourceTree = "<group>"; };
+		8A95A3ED251BE70D00AA5F2F /* Waifu2xFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waifu2xFilter.swift; sourceTree = "<group>"; };
 		8AA098501F699011000CD809 /* waifu2x-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "waifu2x-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AA098531F699011000CD809 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8AA098551F699011000CD809 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -135,10 +164,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8A95A3A8251BE39400AA5F2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A95A3CE251BE3EE00AA5F2F /* SwiftyJSON in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8AA0984D1F699011000CD809 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A17F561251BF045003E7053 /* BBMetalImage.framework in Frameworks */,
+				8A95A3FE251BE77B00AA5F2F /* libCoreML-MPS.a in Frameworks */,
 				8AC427AB1FBF4EA10097EE7C /* waifu2x.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +200,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A95A3AC251BE39400AA5F2F /* CoreML-MPS */ = {
+			isa = PBXGroup;
+			children = (
+				8A95A3BC251BE3B100AA5F2F /* MLModelError.swift */,
+				8A95A3BB251BE3B100AA5F2F /* MLNode.swift */,
+				8A95A3BD251BE3B100AA5F2F /* MPSDS.swift */,
+				8A95A3BE251BE3B100AA5F2F /* MPSMLModel.swift */,
+				8A95A3BA251BE3B100AA5F2F /* RawMLModel.swift */,
+			);
+			path = "CoreML-MPS";
+			sourceTree = "<group>";
+		};
 		8AA098471F699011000CD809 = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +219,7 @@
 				8AA098521F699011000CD809 /* waifu2x-ios */,
 				8AC426EF1FBF35160097EE7C /* waifu2x */,
 				8AC426FA1FBF35160097EE7C /* waifu2xTests */,
+				8A95A3AC251BE39400AA5F2F /* CoreML-MPS */,
 				8AA098511F699011000CD809 /* Products */,
 				8AC426E01FBF2FCC0097EE7C /* Frameworks */,
 			);
@@ -179,6 +231,7 @@
 				8AA098501F699011000CD809 /* waifu2x-ios.app */,
 				8AC426EE1FBF35160097EE7C /* waifu2x.framework */,
 				8AC426F61FBF35160097EE7C /* waifu2xTests.xctest */,
+				8A95A3AB251BE39400AA5F2F /* libCoreML-MPS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -186,7 +239,9 @@
 		8AA098521F699011000CD809 /* waifu2x-ios */ = {
 			isa = PBXGroup;
 			children = (
+				8A95A3D2251BE48300AA5F2F /* waifu2x-ios.entitlements */,
 				8AA098531F699011000CD809 /* AppDelegate.swift */,
+				8A95A3ED251BE70D00AA5F2F /* Waifu2xFilter.swift */,
 				8AA098551F699011000CD809 /* ViewController.swift */,
 				8AC63BFC201833CC001498E0 /* UIImage+Reload.swift */,
 				8AA098571F699011000CD809 /* Main.storyboard */,
@@ -201,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				8AC426E11FBF2FCC0097EE7C /* XCTest.framework */,
+				8A17F560251BF045003E7053 /* BBMetalImage.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -277,6 +333,26 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		8A95A3AA251BE39400AA5F2F /* CoreML-MPS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A95A3AF251BE39400AA5F2F /* Build configuration list for PBXNativeTarget "CoreML-MPS" */;
+			buildPhases = (
+				8A95A3A7251BE39400AA5F2F /* Sources */,
+				8A95A3A8251BE39400AA5F2F /* Frameworks */,
+				8A95A3A9251BE39400AA5F2F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CoreML-MPS";
+			packageProductDependencies = (
+				8A95A3CD251BE3EE00AA5F2F /* SwiftyJSON */,
+			);
+			productName = "CoreML-MPS";
+			productReference = 8A95A3AB251BE39400AA5F2F /* libCoreML-MPS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		8AA0984F1F699011000CD809 /* waifu2x-ios */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8AA098621F699011000CD809 /* Build configuration list for PBXNativeTarget "waifu2x-ios" */;
@@ -284,7 +360,6 @@
 				8AA0984C1F699011000CD809 /* Sources */,
 				8AA0984D1F699011000CD809 /* Frameworks */,
 				8AA0984E1F699011000CD809 /* Resources */,
-				8AB792951F69903B002CEF48 /* ShellScript */,
 				8AC427AF1FBF4EA10097EE7C /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -293,6 +368,8 @@
 				8AC427AE1FBF4EA10097EE7C /* PBXTargetDependency */,
 			);
 			name = "waifu2x-ios";
+			packageProductDependencies = (
+			);
 			productName = "waifu2x-ios";
 			productReference = 8AA098501F699011000CD809 /* waifu2x-ios.app */;
 			productType = "com.apple.product-type.application";
@@ -339,10 +416,14 @@
 		8AA098481F699011000CD809 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0910;
+				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = xieyi;
 				TargetAttributes = {
+					8A95A3AA251BE39400AA5F2F = {
+						CreatedOnToolsVersion = 12.0;
+						LastSwiftMigration = 1200;
+					};
 					8AA0984F1F699011000CD809 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
@@ -367,6 +448,9 @@
 				Base,
 			);
 			mainGroup = 8AA098471F699011000CD809;
+			packageReferences = (
+				8A95A3CC251BE3EE00AA5F2F /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+			);
 			productRefGroup = 8AA098511F699011000CD809 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -374,6 +458,7 @@
 				8AA0984F1F699011000CD809 /* waifu2x-ios */,
 				8AC426ED1FBF35160097EE7C /* waifu2x */,
 				8AC426F51FBF35160097EE7C /* waifu2xTests */,
+				8A95A3AA251BE39400AA5F2F /* CoreML-MPS */,
 			);
 		};
 /* End PBXProject section */
@@ -406,29 +491,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		8AB792951F69903B002CEF48 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
+/* Begin PBXSourcesBuildPhase section */
+		8A95A3A7251BE39400AA5F2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
+				8A95A3C5251BE3B100AA5F2F /* MPSMLModel.swift in Sources */,
+				8A95A3C3251BE3B100AA5F2F /* MLModelError.swift in Sources */,
+				8A95A3C1251BE3B100AA5F2F /* RawMLModel.swift in Sources */,
+				8A95A3C2251BE3B100AA5F2F /* MLNode.swift in Sources */,
+				8A95A3C4251BE3B100AA5F2F /* MPSDS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# xcode-build-bump.sh\n# @desc Auto-increment the build number every time the project is run.\n# @usage\n# 1. Select: your Target in Xcode\n# 2. Select: Build Phases Tab\n# 3. Select: Add Build Phase -> Add Run Script\n# 4. Paste code below in to new \"Run Script\" section\n# 5. Drag the \"Run Script\" below \"Link Binaries With Libraries\"\n# 6. Insure that your starting build number is set to a whole integer and not a float (e.g. 1, not 1.0)\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
-/* End PBXShellScriptBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
 		8AA0984C1F699011000CD809 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8AA098561F699011000CD809 /* ViewController.swift in Sources */,
 				8AC63BFE201833CC001498E0 /* UIImage+Reload.swift in Sources */,
+				8A95A3EE251BE70D00AA5F2F /* Waifu2xFilter.swift in Sources */,
 				8AA098541F699011000CD809 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -514,6 +596,58 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8A95A3B0251BE39400AA5F2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 34A2STWT5M;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8A95A3B1251BE39400AA5F2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 34A2STWT5M;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		8AA098601F699011000CD809 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -616,7 +750,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -626,14 +761,20 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "waifu2x-ios/waifu2x-ios.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 34A2STWT5M;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = NO;
 				INFOPLIST_FILE = "waifu2x-ios/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = xieyi.waifu2x.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -644,14 +785,20 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "waifu2x-ios/waifu2x-ios.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 34A2STWT5M;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = NO;
 				INFOPLIST_FILE = "waifu2x-ios/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = xieyi.waifu2x.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -663,6 +810,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
+				COREML_CODEGEN_LANGUAGE = None;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 34A2STWT5M;
@@ -672,7 +820,11 @@
 				INFOPLIST_FILE = waifu2x/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = xieyi.waifu2x;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -690,6 +842,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
+				COREML_CODEGEN_LANGUAGE = None;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 34A2STWT5M;
@@ -699,7 +852,11 @@
 				INFOPLIST_FILE = waifu2x/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = xieyi.waifu2x;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -718,7 +875,11 @@
 				DEVELOPMENT_TEAM = 34A2STWT5M;
 				INFOPLIST_FILE = waifu2xTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = xieyi.waifu2xTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -734,7 +895,11 @@
 				DEVELOPMENT_TEAM = 34A2STWT5M;
 				INFOPLIST_FILE = waifu2xTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = xieyi.waifu2xTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -745,6 +910,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8A95A3AF251BE39400AA5F2F /* Build configuration list for PBXNativeTarget "CoreML-MPS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A95A3B0251BE39400AA5F2F /* Debug */,
+				8A95A3B1251BE39400AA5F2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8AA0984B1F699011000CD809 /* Build configuration list for PBXProject "waifu2x-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -782,6 +956,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8A95A3CC251BE3EE00AA5F2F /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8A95A3CD251BE3EE00AA5F2F /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8A95A3CC251BE3EE00AA5F2F /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8AA098481F699011000CD809 /* Project object */;
 }
