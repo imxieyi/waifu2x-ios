@@ -8,7 +8,9 @@
 ## Introduction
 This is a [Core ML](https://developer.apple.com/documentation/coreml) implementation of [waifu2x](https://github.com/nagadomi/waifu2x). The target of this project is to run waifu2x models right on iOS devices even without network. For macOS version please refer to [waifu2x-mac](https://github.com/imxieyi/waifu2x-mac).
 
-**WARNING:** Video support based on [Metal Performance Shaders](https://developer.apple.com/documentation/metalperformanceshaders) is included in this repo. It is meant to be run on macOS with a powerful discerete GPU through [Mac Catalyst](https://developer.apple.com/mac-catalyst/). Running it on iOS devices will significantly drop battery life and cause thermal issues. The author is not responsible of any damage to your device.
+Video support based on [Metal Performance Shaders](https://developer.apple.com/documentation/metalperformanceshaders) is also included in this repo. Models are loaded directly from Core ML models (see [CoreML-MPS](https://github.com/imxieyi/waifu2x-ios/tree/master/CoreML-MPS)). It is meant to be run on macOS with a powerful discerete GPU through [Mac Catalyst](https://developer.apple.com/mac-catalyst/). Running it on iOS devices will significantly drop battery life and cause thermal issues. Most likely it will crash immediately.
+
+**The author is not responsible of any damage to your device.**
 
 ## Requirements
  - XCode 9+
