@@ -142,7 +142,9 @@ extension ViewController: UIDocumentPickerDelegate {
         }) { (success) in
             self.videoWriter.finish {
                 print("finished")
-                self.progress.text = String(format: "Finished. Avg FPS:%.2f", Double(index) / Date().timeIntervalSince(startTime))
+                DispatchQueue.main.async {
+                    self.progress.text = String(format: "Finished. Avg FPS:%.2f", Double(index) / Date().timeIntervalSince(startTime))
+                }
             }
         }
     }
