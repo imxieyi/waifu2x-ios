@@ -3,7 +3,6 @@
 [![](https://img.shields.io/github/license/imxieyi/waifu2x-ios.svg)](https://github.com/imxieyi/waifu2x-ios/blob/master/LICENSE)
 
 [![](assets/appstore.svg)](https://itunes.apple.com/app/waifu2x/id1286485858)
-[![](assets/macappstore.svg)](https://apps.apple.com/us/app/id1479332784)
 
 ## Introduction
 This is a [Core ML](https://developer.apple.com/documentation/coreml) implementation of [waifu2x](https://github.com/nagadomi/waifu2x). The target of this project is to run waifu2x models right on iOS devices even without network. For macOS version please refer to [waifu2x-mac](https://github.com/imxieyi/waifu2x-mac).
