@@ -11,16 +11,14 @@ import Foundation
 extension UIImage {
     
     func alpha() -> [UInt8] {
-        let width = Int(size.width)
-        let height = Int(size.height)
-        let data = UnsafeMutablePointer<UInt8>.allocate(capacity: width * height)
-        let alphaOnly = CGContext(data: data, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width, space: CGColorSpace.init(name: CGColorSpace.linearGray)!, bitmapInfo: CGImageAlphaInfo.alphaOnly.rawValue)
-        alphaOnly?.draw(cgImage!, in: CGRect(x: 0, y: 0, width: width, height: height))
-        var result: [UInt8] = []
-        for i in 0 ..< width * height {
-            result.append(data[i])
+        let width = Int(cgImage!.width)
+        let height = Int(cgImage!.height)
+        var data = [UInt8](repeating: 0, count: width * height)
+        data.withUnsafeMutableBytes { pointer in
+            let alphaOnly = CGContext(data: pointer.baseAddress, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width, space: CGColorSpace.init(name: CGColorSpace.linearGray)!, bitmapInfo: CGImageAlphaInfo.alphaOnly.rawValue)
+            alphaOnly!.draw(cgImage!, in: CGRect(x: 0, y: 0, width: width, height: height))
         }
-        return result
+        return data
     }
     
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8A17F561251BF045003E7053 /* BBMetalImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A17F560251BF045003E7053 /* BBMetalImage.framework */; };
 		8A17F562251BF045003E7053 /* BBMetalImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A17F560251BF045003E7053 /* BBMetalImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8A4F3CB427BD0FBB0079A60C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A4F3CB327BD0FBB0079A60C /* CoreServices.framework */; };
 		8A95A3C1251BE3B100AA5F2F /* RawMLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A95A3BA251BE3B100AA5F2F /* RawMLModel.swift */; };
 		8A95A3C2251BE3B100AA5F2F /* MLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A95A3BB251BE3B100AA5F2F /* MLNode.swift */; };
 		8A95A3C3251BE3B100AA5F2F /* MLModelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A95A3BC251BE3B100AA5F2F /* MLModelError.swift */; };
@@ -105,6 +106,7 @@
 
 /* Begin PBXFileReference section */
 		8A17F560251BF045003E7053 /* BBMetalImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BBMetalImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A4F3CB327BD0FBB0079A60C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/CoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		8A6D46BC1F6AC454008275C7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8A95A3AB251BE39400AA5F2F /* libCoreML-MPS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCoreML-MPS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A95A3BA251BE3B100AA5F2F /* RawMLModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawMLModel.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				8A17F561251BF045003E7053 /* BBMetalImage.framework in Frameworks */,
 				8A95A3FE251BE77B00AA5F2F /* libCoreML-MPS.a in Frameworks */,
 				8AC427AB1FBF4EA10097EE7C /* waifu2x.framework in Frameworks */,
+				8A4F3CB427BD0FBB0079A60C /* CoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +258,7 @@
 		8AC426E01FBF2FCC0097EE7C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8A4F3CB327BD0FBB0079A60C /* CoreServices.framework */,
 				8AC426E11FBF2FCC0097EE7C /* XCTest.framework */,
 				8A17F560251BF045003E7053 /* BBMetalImage.framework */,
 			);
@@ -767,6 +771,7 @@
 				DEVELOPMENT_TEAM = 34A2STWT5M;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = NO;
 				INFOPLIST_FILE = "waifu2x-ios/Info.plist";
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -791,6 +796,7 @@
 				DEVELOPMENT_TEAM = 34A2STWT5M;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = NO;
 				INFOPLIST_FILE = "waifu2x-ios/Info.plist";
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

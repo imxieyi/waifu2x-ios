@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Accelerate
 import UIKit
 import CoreML
 import MetalKit
@@ -24,7 +25,7 @@ public class Waifu2x {
     /// Do not exactly know its function
     /// However it can on average improve PSNR by 0.09
     /// https://github.com/nagadomi/waifu2x/commit/797b45ae23665a1c5e3c481c018e48e6f0d0e383
-    static let clip_eta8 = Float((1.0 / 255.0) * 0.5 - (1.0e-7 * (1.0 / 255.0) * 0.5))
+    static let clip_eta8: Float = 0.00196078411
     
     public static var interrupt = false
     
@@ -46,17 +47,16 @@ public class Waifu2x {
         var channels = 3
         var alpha: [UInt8]! = nil
         if hasalpha {
-            alpha = image.alpha()
-            var ralpha = false
+            var u8Alpha = image.alpha()
+            var floatAlpha = [Float](repeating: 0, count: u8Alpha.count)
             // Check if it really has alpha
-            for a in alpha {
-                if a < 255 {
-                    ralpha = true
-                    break
-                }
-            }
-            if ralpha {
+            var minValue: Float = 1.0
+            var minIndex: vDSP_Length = 0
+            vDSP_vfltu8(&u8Alpha, 1, &floatAlpha, 1, vDSP_Length(u8Alpha.count))
+            vDSP_minvi(&floatAlpha, 1, &minValue, &minIndex, vDSP_Length(u8Alpha.count))
+            if minValue < 255.0 {
                 channels = 4
+                alpha = u8Alpha
             } else {
                 hasalpha = false
             }

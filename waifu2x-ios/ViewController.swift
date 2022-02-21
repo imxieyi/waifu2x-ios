@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreML
+import CoreServices
 import AVFoundation
 import waifu2x
 import BBMetalImage
@@ -84,7 +85,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBAction func onVideoTest(_ sender: Any) {
         let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypeVideo), String(kUTTypeMPEG4)], in: .open)
         documentPicker.allowsMultipleSelection = false
-        documentPicker.shouldShowFileExtensions = true
+        if #available(iOS 13.0, *) {
+            documentPicker.shouldShowFileExtensions = true
+        }
         documentPicker.delegate = self
         present(documentPicker, animated: true, completion: nil)
     }

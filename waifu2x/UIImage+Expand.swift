@@ -16,14 +16,17 @@ extension UIImage {
     ///
     /// - Returns: Float array of rgb values
     public func expand(withAlpha: Bool) -> [Float] {
-        let width = Int(self.size.width)
-        let height = Int(self.size.height)
+        let width = Int(self.cgImage!.width)
+        let height = Int(self.cgImage!.height)
         
         let exwidth = width + 2 * Waifu2x.shrink_size
         let exheight = height + 2 * Waifu2x.shrink_size
         
-        let pixels = self.cgImage?.dataProvider?.data
-        let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixels!)
+        var u8Array = [UInt8](repeating: 0, count: width * height * 4)
+        u8Array.withUnsafeMutableBytes { u8Pointer in
+            let context = CGContext(data: u8Pointer.baseAddress, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 4 * width, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
+            context!.draw(cgImage!, in: CGRect(x: 0, y: 0, width: width, height: height))
+        }
         
         var arr = [Float](repeating: 0, count: 3 * exwidth * exheight)
         
@@ -36,16 +39,16 @@ extension UIImage {
                 xx = x + Waifu2x.shrink_size
                 yy = y + Waifu2x.shrink_size
                 pixel = (width * y + x) * 4
-                r = data[pixel]
-                g = data[pixel + 1]
-                b = data[pixel + 2]
+                r = u8Array[pixel]
+                g = u8Array[pixel + 1]
+                b = u8Array[pixel + 2]
                 // !!! rgb values are from 0 to 1
                 // https://github.com/chungexcy/waifu2x-new/blob/master/image_test.py
                 fr = Float(r) / 255 + Waifu2x.clip_eta8
                 fg = Float(g) / 255 + Waifu2x.clip_eta8
                 fb = Float(b) / 255 + Waifu2x.clip_eta8
                 if withAlpha {
-                    a = data[pixel + 3]
+                    a = u8Array[pixel + 3]
                     if a > 0 {
                         fr *= 255 / Float(a)
                         fg *= 255 / Float(a)
@@ -59,9 +62,9 @@ extension UIImage {
         }
         // Top-left corner
         pixel = 0
-        r = data[pixel]
-        g = data[pixel + 1]
-        b = data[pixel + 2]
+        r = u8Array[pixel]
+        g = u8Array[pixel + 1]
+        b = u8Array[pixel + 2]
         fr = Float(r) / 255
         fg = Float(g) / 255
         fb = Float(b) / 255
@@ -74,9 +77,9 @@ extension UIImage {
         }
         // Top-right corner
         pixel = (width - 1) * 4
-        r = data[pixel]
-        g = data[pixel + 1]
-        b = data[pixel + 2]
+        r = u8Array[pixel]
+        g = u8Array[pixel + 1]
+        b = u8Array[pixel + 2]
         fr = Float(r) / 255
         fg = Float(g) / 255
         fb = Float(b) / 255
@@ -89,9 +92,9 @@ extension UIImage {
         }
         // Bottom-left corner
         pixel = (width * (height - 1)) * 4
-        r = data[pixel]
-        g = data[pixel + 1]
-        b = data[pixel + 2]
+        r = u8Array[pixel]
+        g = u8Array[pixel + 1]
+        b = u8Array[pixel + 2]
         fr = Float(r) / 255
         fg = Float(g) / 255
         fb = Float(b) / 255
@@ -104,9 +107,9 @@ extension UIImage {
         }
         // Bottom-right corner
         pixel = (width * (height - 1) + (width - 1)) * 4
-        r = data[pixel]
-        g = data[pixel + 1]
-        b = data[pixel + 2]
+        r = u8Array[pixel]
+        g = u8Array[pixel + 1]
+        b = u8Array[pixel + 2]
         fr = Float(r) / 255
         fg = Float(g) / 255
         fb = Float(b) / 255
@@ -120,9 +123,9 @@ extension UIImage {
         // Top & bottom bar
         for x in 0..<width {
             pixel = x * 4
-            r = data[pixel]
-            g = data[pixel + 1]
-            b = data[pixel + 2]
+            r = u8Array[pixel]
+            g = u8Array[pixel + 1]
+            b = u8Array[pixel + 2]
             fr = Float(r) / 255
             fg = Float(g) / 255
             fb = Float(b) / 255
@@ -133,9 +136,9 @@ extension UIImage {
                 arr[y * exwidth + xx + exwidth * exheight * 2] = fb
             }
             pixel = (width * (height - 1) + x) * 4
-            r = data[pixel]
-            g = data[pixel + 1]
-            b = data[pixel + 2]
+            r = u8Array[pixel]
+            g = u8Array[pixel + 1]
+            b = u8Array[pixel + 2]
             fr = Float(r) / 255
             fg = Float(g) / 255
             fb = Float(b) / 255
@@ -149,9 +152,9 @@ extension UIImage {
         // Left & right bar
         for y in 0..<height {
             pixel = (width * y) * 4
-            r = data[pixel]
-            g = data[pixel + 1]
-            b = data[pixel + 2]
+            r = u8Array[pixel]
+            g = u8Array[pixel + 1]
+            b = u8Array[pixel + 2]
             fr = Float(r) / 255
             fg = Float(g) / 255
             fb = Float(b) / 255
@@ -162,9 +165,9 @@ extension UIImage {
                 arr[yy * exwidth + x + exwidth * exheight * 2] = fb
             }
             pixel = (width * y + (width - 1)) * 4
-            r = data[pixel]
-            g = data[pixel + 1]
-            b = data[pixel + 2]
+            r = u8Array[pixel]
+            g = u8Array[pixel + 1]
+            b = u8Array[pixel + 2]
             fr = Float(r) / 255
             fg = Float(g) / 255
             fb = Float(b) / 255
