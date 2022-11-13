@@ -44,7 +44,7 @@ public class Waifu2x {
         Waifu2x.interrupt = false
         var hasalpha = image.cgImage?.alphaInfo != CGImageAlphaInfo.none
         debugPrint("With Alpha: \(hasalpha)")
-        var channels = 3
+        let channels = 4
         var alpha: [UInt8]! = nil
         if hasalpha {
             var u8Alpha = image.alpha()
@@ -55,7 +55,6 @@ public class Waifu2x {
             vDSP_vfltu8(&u8Alpha, 1, &floatAlpha, 1, vDSP_Length(u8Alpha.count))
             vDSP_minvi(&floatAlpha, 1, &minValue, &minIndex, vDSP_Length(u8Alpha.count))
             if minValue < 255.0 {
-                channels = 4
                 alpha = u8Alpha
             } else {
                 hasalpha = false
@@ -171,8 +170,10 @@ public class Waifu2x {
                     x_new = x_exp - x
                     y_new = y_exp - y
                     multi[y_new * (Waifu2x.block_size + 2 * Waifu2x.shrink_size) + x_new] = NSNumber(value: expanded[y_exp * expwidth + x_exp])
-                    multi[y_new * (Waifu2x.block_size + 2 * Waifu2x.shrink_size) + x_new + (block_size + 2 * Waifu2x.shrink_size) * (block_size + 2 * Waifu2x.shrink_size)] = NSNumber(value: expanded[y_exp * expwidth + x_exp + expwidth * expheight])
-                    multi[y_new * (Waifu2x.block_size + 2 * Waifu2x.shrink_size) + x_new + (block_size + 2 * Waifu2x.shrink_size) * (block_size + 2 * Waifu2x.shrink_size) * 2] = NSNumber(value: expanded[y_exp * expwidth + x_exp + expwidth * expheight * 2])
+                    var dest = y_new * (Waifu2x.block_size + 2 * Waifu2x.shrink_size) + x_new + (block_size + 2 * Waifu2x.shrink_size) * (block_size + 2 * Waifu2x.shrink_size)
+                    multi[dest] = NSNumber(value: expanded[y_exp * expwidth + x_exp + expwidth * expheight])
+                    dest = y_new * (Waifu2x.block_size + 2 * Waifu2x.shrink_size) + x_new + (block_size + 2 * Waifu2x.shrink_size) * (block_size + 2 * Waifu2x.shrink_size) * 2
+                    multi[dest] = NSNumber(value: expanded[y_exp * expwidth + x_exp + expwidth * expheight * 2])
                 }
             }
             model_pipeline.appendObject(multi)
@@ -198,6 +199,8 @@ public class Waifu2x {
         var bitmapInfo = CGBitmapInfo.byteOrder32Big.rawValue
         if hasalpha {
              bitmapInfo |= CGImageAlphaInfo.last.rawValue
+        } else {
+            bitmapInfo |= CGImageAlphaInfo.noneSkipLast.rawValue
         }
         let cgImage = CGImage(width: out_width, height: out_height, bitsPerComponent: 8, bitsPerPixel: 8 * channels, bytesPerRow: out_width * channels, space: colorSpace, bitmapInfo: CGBitmapInfo.init(rawValue: bitmapInfo), provider: dataProvider, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent)
         let outImage = UIImage(cgImage: cgImage!)
