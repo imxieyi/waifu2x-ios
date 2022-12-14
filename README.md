@@ -11,7 +11,7 @@ Video support based on [Metal Performance Shaders](https://developer.apple.com/d
 
 **The author is not responsible of any damage to your device.**
 
-## Requirements
+## Requirements (for [shared library](https://github.com/imxieyi/waifu2x-ios/tree/master/waifu2x))
  - XCode 9+
  - iOS 11+
  - macOS 10.15+ (for Mac Catalyst)
